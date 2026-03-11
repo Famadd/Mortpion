@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<div class="flex">
+    <form method="POST">
+        <div class="flex grid-cols-20 gap-2 py-32">
+            {% for morpion in SESSION['morpion_bd'] %}
+                <div class="game-cell">
+                    <label>
+                        <input type="checkbox" name="team_morpion" value='{{ morpion | tojson }}'>
+                        <img src="{{ SESSION['DIRECTORY'] }}/{{ morpion.img_path }}" alt="" class="cell-img-create">
+                        <div class="morpion-stats" aria-hidden="false">
+                            <span class="stat hp" title="HP" aria-label="Points de vie">
+                                <span class="icon" aria-hidden="true">❤️</span>
+                                <span class="stat-val">{{ morpion['hp'] }}</span>
+                            </span>
+                            <span class="stat att" title="Attaque" aria-label="Attaque">
+                                <span class="icon" aria-hidden="true">⚔️</span>
+                                <span class="stat-val">{{ morpion['att'] }}</span>
+                            </span>
+                            <span class="stat mana" title="Mana" aria-label="Mana">
+                                <span class="icon" aria-hidden="true">💧</span>
+                                <span class="stat-val">{{ morpion['mana'] }}</span>
+                            </span>
+                            <span class="stat hit" title="Précision" aria-label="Précision">
+                                <span class="icon" aria-hidden="true">🎯</span>
+                                <span class="stat-val">{{ morpion['hit'] }}</span>
+                            </span>
+                        </div>
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="flex w-64">
+            <label for="joueur1" class="team-player">Nom de l'équipe :</label>
+            <input type="text" id="joueur1" name="team_name" class="input-text">
+        </div>
+        <div class="flex w-64">
+            <label for="color" class="team-color">Couleur : </label>
+            <select name="team_color" id="color" class="input-select">
+                <option class="bg-red-300" value="red">Rouge</option>
+                <option class="bg-blue-300" value="blue">blue</option>
+                <option class="bg-yellow-300" value="yellow">Jaune</option>
+                <option class="bg-green-300" value="green">Vert</option>
+                <option class="bg-purple-300" value="purple">Violet</option>
+                <option class="bg-pink-300" value="pink">Rose</option>
+                <option class="bg-orange-300" value="orange">Orange</option>
+                <option class="bg-cyan-300" value="cyan">Turquoise</option>
+            </select>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" name="submit_team_create" value="1" class="bg-green-400 p-2 rounded">
+                Créer l'équipe
+            </button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

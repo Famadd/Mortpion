@@ -1,0 +1,29 @@
+{% for morpion in SESSION['team_joueur1'] %}
+    {% set is_placed = (morpion.id_morpion, morpion.player) in SESSION['placed_morpions_joueur1'] %}
+    <div class="game-cell {% if is_placed %}morpion-placed{% endif %}">
+        <form method="POST">
+            <input type="hidden" name="morpion" value='{{ morpion | tojson }}'>
+            <button type="submit" {% if is_placed %}disabled{% endif %}>
+                <img src="{{ SESSION['DIRECTORY'] }}{{ morpion.img_path }}" alt="" class="cell-img">
+                    <div class="morpion-stats" aria-hidden="false">
+                        <span class="stat hp" title="HP" aria-label="Points de vie">
+                            <span class="icon" aria-hidden="true">❤️</span>
+                            <span class="stat-val">{{ morpion.hp }}</span>
+                        </span>
+                        <span class="stat att" title="Attaque" aria-label="Attaque">
+                            <span class="icon" aria-hidden="true">⚔️</span>
+                            <span class="stat-val">{{ morpion.att }}</span>
+                        </span>
+                        <span class="stat mana" title="Mana" aria-label="Mana">
+                            <span class="icon" aria-hidden="true">💧</span>
+                            <span class="stat-val">{{ morpion.mana }}</span>
+                        </span>
+                        <span class="stat hit" title="Précision" aria-label="Précision">
+                            <span class="icon" aria-hidden="true">🎯</span>
+                            <span class="stat-val">{{ morpion.hit }}</span>
+                        </span>
+                    </div>
+            </button>
+        </form>
+    </div>
+{% endfor %}

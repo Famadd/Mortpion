@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+  <div class="team-container">
+    <h1 class="team-title">Choix des équipes</h1>
+
+    <div class="team-card">
+
+      <form method="POST" action="/jeu.html" class="team-form">
+        <div class="team-row">
+          <div class="team-player">Couleur de <strong>{{ SESSION['joueur1'] }}</strong></div>
+          <div class="team-options">
+            <label class="color-option">
+              <input type="radio" name="couleurJoueur1" value="red" checked>
+              <span class="color-label red">red</span>
+            </label>
+            <label class="color-option">
+              <input type="radio" name="couleurJoueur1" value="blue">
+              <span class="color-label blue">blue</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="team-row">
+          <div class="team-player">Couleur de <strong>{{ SESSION['joueur2'] }}</strong></div>
+          <div class="team-options">
+            <label class="color-option">
+              <input type="radio" name="couleurJoueur2" value="blue" checked>
+              <span class="color-label blue">blue</span>
+            </label>
+            <label class="color-option">
+              <input type="radio" name="couleurJoueur2" value="red">
+              <span class="color-label red">red</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="team-actions">
+          <button class="btn-primary" type="submit" name="submit_teams">Démarrer le jeu !</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+{% endblock %}

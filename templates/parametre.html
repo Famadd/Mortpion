@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+  <div class="team-container">
+    <h1 class="team-title">Paramètres de la partie</h1>
+
+    <div class="team-card">
+      <form method="POST" action="/equipe.html" class="team-form">
+
+        <div class="team-row">
+          <label for="joueur1" class="team-player">Pseudo du Joueur 1 :</label>
+          <div class="team-options"><input type="text" id="joueur1" name="joueur1" class="input-text"></div>
+        </div>
+
+        <div class="team-row">
+          <label for="joueur2" class="team-player">Pseudo du Joueur 2 :</label>
+          <div class="team-options"><input type="text" id="joueur2" name="joueur2" class="input-text"></div>
+        </div>
+
+        <div class="team-row">
+          <label for="dimension" class="team-player">Dimension du plateau :</label>
+          <div class="team-options">
+            <select name="dimension" id="dimension" class="input-select">
+              <option value="3">3 X 3</option>
+              <option value="4">4 X 4</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="team-row">
+          <label for="max_tours" class="team-player">Nombre maximum de tours :</label>
+          <div class="team-options"><input type="number" id="max_tours" name="max_tours" class="input-text" value="20" min="1"></div>
+        </div>
+
+        <div class="team-actions">
+          <button class="btn-primary" type="submit" name="submit_config">Gestion des équipes</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+{% endblock %}

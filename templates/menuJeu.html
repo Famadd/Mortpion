@@ -1,0 +1,94 @@
+<!-- menu -->
+<div class="grid grid-cols-3">
+  <div class="grid 
+    {% if SESSION['dimension'] == 3 %} grid-rows-6 {% endif %}
+    {% if SESSION['dimension'] == 4 %} grid-rows-8 {% endif %}">
+    <div class="text-center py-2 px-4 font-bold text-sm border-b-2 border-black bg-{{ SESSION['couleurJoueur1'] }}-200">
+      <span class="block">{{ SESSION['joueur1'] }}</span>
+      <div class="w-8 h-8 rounded-full bg-{{ SESSION['couleurJoueur1'] }}-500 margin-auto mt-2 border-2 border-black mx-auto"></div>
+    </div>
+    {% include 'team1Case.html' %}
+  </div>
+  <nav class="bg-gray-400 w-full h-full">
+      <div class="grid grid-rows-4 text-center gap-5">
+        <div class="max-h-16">
+          <form method="POST">
+            <input type="text" name="choix" value="placement" hidden>
+            <button type="submit" class="w-full max-w-64 bg-blue-300 text-white justify-center rounded">
+                Placement
+            </button>
+          </form>
+        </div>
+
+        <div class="max-h-16">
+          <form method="POST">
+            <input type="text" name="choix" value="attaque" hidden>
+            <button type="submit" class="w-full max-w-64 bg-blue-300 text-white justify-center rounded">
+                Attaque
+            </button>
+          </form>
+        </div>
+        <div class="max-h-16">
+          <form method="POST">
+            <input type="text" name="choix" value="sort" hidden>
+            <button type="submit" class="w-full max-w-64 bg-blue-300 text-white justify-center rounded">
+                Sort
+            </button>
+          </form>
+        </div>
+        <div class="grid max-h-16 gap-8">
+          <div>
+            <form method="POST">
+              <input type="text" name="choix_sort" value="fire_ball" hidden>
+              {% if SESSION['action_type'] == 'spell' %}
+                <button type="submit" class="w-full max-w-64 bg-blue-300 text-white justify-center rounded">
+                  fire_ball
+                </button>
+              {% else %}
+                <button disabled type="submit" class="w-full max-w-64 bg-black opacity-25 text-white justify-center rounded">
+                  fire_ball
+                </button>
+              {% endif %}
+            </form>
+          </div>
+          <div>
+            <form method="POST">
+              <input type="text" name="choix_sort" value="heal" hidden>
+              {% if SESSION['action_type'] == 'spell' %}
+                <button type="submit" class="w-full max-w-64 bg-blue-300 text-white justify-center rounded">
+                  Heal
+                </button>
+              {% else %}
+                <button disabled type="submit" class="w-full max-w-64 bg-black opacity-25 text-white justify-center rounded">
+                  Heal
+                </button>
+              {% endif %}
+            </form>
+          </div>
+          <div>
+            <form method="POST">
+              <input type="text" name="choix_sort" value="armageddon" hidden>
+              {% if SESSION['action_type'] == 'spell' %}
+                <button type="submit" class="w-full max-w-64 bg-blue-300 text-white justify-center rounded">
+                  Armageddon
+                </button>
+              {% else %}
+                <button disabled type="submit" class="w-full max-w-64 bg-black opacity-25 text-white justify-center rounded">
+                  Armageddon
+                </button>
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="grid 
+      {% if SESSION['dimension'] == 3 %} grid-rows-6 {% endif %}
+      {% if SESSION['dimension'] == 4 %} grid-rows-8 {% endif %}">
+      <div class="text-center py-2 px-4 font-bold text-sm border-b-2 border-black bg-{{ SESSION['couleurJoueur2'] }}-200">
+        <span class="block">{{ SESSION['joueur2'] }}</span>
+        <div class="w-8 h-8 rounded-full bg-{{ SESSION['couleurJoueur2'] }}-500 margin-auto mt-2 border-2 border-black mx-auto"></div>
+      </div>
+      {% include 'team2Case.html' %}
+    </div>
+  </div>

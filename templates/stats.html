@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+                                                <!-- PAGE STATISTIQUES DU SITE -->
+
+{% block main_content %}
+    <div class="team-container">
+        <h1 class="team-title">Statistiques</h1>
+        <div class="team-card">
+            <h2 class="font-bold">Nombre d'instances</h2>
+            <ul>
+                <li>Table "morpion" : {{ REQUEST_VARS['nb_instances_morpions'] }}</li>
+                <li>Table "partie" : {{ REQUEST_VARS['nb_instances_parties'] }}</li>
+                <li>Table "equipe" : {{ REQUEST_VARS['nb_instances_equipes'] }}</li>
+            </ul>
+
+            <h2 class="font-bold">Top 3 des meilleures équipes</h2>
+            <ul>
+                {% for instance in REQUEST_VARS['top_3_teams'] %}
+                    <li>Nom : {{ instance[0] }} — Couleur : {{ instance[1] }} — Victoires : {{ instance[2] }}</li>
+                {% endfor %}
+            </ul>
+
+            <h2 class="font-bold">Partie la plus rapide</h2>
+            <ul>
+                <li>Id de partie : {{ REQUEST_VARS['shortest_game'][0] }}</li>
+                <li>Temps de la partie : {{ REQUEST_VARS['shortest_game'][1] }}</li>
+                <li>Equipe Gagnante : {{ REQUEST_VARS['shortest_game'][2] }}</li>
+            </ul>
+
+            <h2 class="font-bold">Partie la plus longue</h2>
+            <ul>
+                <li>Id de partie : {{ REQUEST_VARS['longest_game'][0] }}</li>
+                <li>Temps de la partie : {{ REQUEST_VARS['longest_game'][1] }}</li>
+                <li>Equipe Gagnante : {{ REQUEST_VARS['longest_game'][2] }}</li>
+            </ul>
+
+            <h2 class="font-bold">Nombre moyen de lignes de journalisation par mois/année</h2>
+            <ul>
+                {% for instance in REQUEST_VARS['average_lines'] %}
+                    <li>{{ instance[0] }}/{{ instance[1] }} : {{ instance[2] }} lignes</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

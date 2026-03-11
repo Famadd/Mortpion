@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <base href="/">
+  <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+  <meta content="UTF-8" http-equiv="encoding">
+  <link type="text/css" rel="stylesheet" href="{{ SESSION['DIRECTORY'] }}/static/css/style.css">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ SESSION['DIRECTORY'] }}/websites/mortpion/static/img/jeu-morpion.jpg" />
+  <title>{{ SESSION['APP'] }} - {{ SESSION['BASELINE'] }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  {% include 'header.html' %}
+
+  <div id="div-central">
+    {% include 'menu.html' %}
+  
+    <main>
+      {% block main_content %}{% endblock %}
+    </main>
+  </div>
+
+  {% include 'footer.html' %}
+</body>
+</html>

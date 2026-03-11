@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+  {% if SESSION['game_over'] and SESSION['winner'] %}
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+      <div style="background: white; padding: 60px; border-radius: 20px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+        <h1 style="font-size: 48px; margin: 0 0 20px 0; color: #000;">🎉 Fin de Partie 🎉</h1>
+        {% if SESSION['winner'] == 'Match Nul' %}
+          <p style="font-size: 36px; margin: 20px 0; color: #333;"><strong>{{ SESSION['winner'] }}</strong></p>
+          <p style="font-size: 18px; margin: 10px 0; color: #666;">Nombre maximum de tours atteint !</p>
+        {% else %}
+          <p style="font-size: 36px; margin: 20px 0; color: #333;"><strong>{{ SESSION['winner'] }}</strong> a gagné !</p>
+        {% endif %}
+        <a href="/accueil.html" style="display: inline-block; margin-top: 30px; padding: 15px 40px; background-color: #3b82f6; color: white; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: bold;">Retour à l'accueil</a>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if SESSION['action_message'] %}
+    <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #f3f4f6; padding: 15px 25px; border-radius: 8px; border-left: 4px solid #f59e0b; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 100; max-width: 600px;">
+      <p style="margin: 0; font-size: 16px; font-weight: 600; color: #333;">{{ SESSION['action_message'] }}</p>
+    </div>
+  {% endif %}
+
+  <div class="team-container">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+      <div>
+        <h1 class="team-title">Plateau de jeu</h1>
+        <p style="font-size: 16px; color: #666; margin-top: 5px;">Tour {{ SESSION['tour_number'] }}</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-weight: bold; font-size: 18px;">Tour: {{ SESSION['game']['joueurCourant']['nom'] }}</span>
+        <div class="w-10 h-10 rounded-full border-4 border-black bg-{{ SESSION['game']['joueurCourant']['team_color'] }}-500"></div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          {% include 'menuJeu.html' %}
+        </div>
+        <div>
+          <div class="{% if SESSION['dimension'] == 3 %} game-grid grid-rows-3 grid-cols-3 {% endif %}
+                      {% if SESSION['dimension'] == 4 %} game-grid grid-rows-4 grid-cols-4 {% endif %}">
+                {% include 'gridCase.html' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

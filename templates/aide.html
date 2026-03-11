@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<div class="max-w-4xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-xl leading-relaxed">
+  <h2 class="text-3xl font-semibold mb-6 text-center">Règles du jeu</h2>
+
+  <p>
+      Dans le morpion classique, l’objectif est d’être la première personne à aligner une rangée de morpions 
+      sur une grille (horizontalement, verticalement ou en diagonale). Ce jeu reprend ce principe mais y ajoute 
+      des mécaniques avancées.
+  </p>
+
+  <h3 class="text-xl font-semibold mt-6 mb-2">Déroulement d’une partie</h3>
+  <p>
+      Les deux joueuses jouent sur la même machine, chacune leur tour. À chaque tour, une seule action peut être effectuée :
+  </p>
+  <ul class="list-disc ml-6 mt-2">
+      <li>Placer un morpion sur la grille</li>
+      <li>Attaquer un morpion adjacent</li>
+      <li>Lancer un sort</li>
+  </ul>
+
+  <p class="mt-4">
+    <strong>Les actions se font dans l'ordre :</strong><br><br>
+    <strong>Pour le placement :</strong><br>
+    Choix de l'action Placement <strong> -> </strong> Choix du morpion à placer <strong> -> </strong> Choix de la case sur la grille<br><br>
+    <strong>Pour l'attaque :</strong><br>
+    Choix de l'action Attaque <strong> -> </strong> Choix du morpion attaquant sur la grille
+    <strong> -> </strong> Choix du morpion cible sur la grille<br><br>
+    <strong>Pour le sort :</strong><br>
+    Choix de l'action Sort <strong> -> </strong> Choix du sort à lancer 
+    <strong> -> </strong> Choix du morpion qui lance le sort sur la grille
+    <strong> -> </strong> Choix du morpion cible sur la grille
+</p>
+
+  <p class="mt-4">
+      La grille peut être en <strong>3×3</strong> ou <strong>4×4</strong>. La partie s’arrête lorsqu’un joueur gagne, 
+      ou lorsque le nombre maximal de tours est atteint.
+  </p>
+
+  <h3 class="text-xl font-semibold mt-6 mb-2">Conditions de victoire</h3>
+  <ul class="list-disc ml-6">
+      <li>Aligner 3 morpions en 3×3, ou 4 morpions en 4×4</li>
+      <li>Éliminer tous les morpions adverses</li>
+      <li>L’adversaire ne peut plus effectuer d’action</li>
+  </ul>
+
+  <h3 class="text-xl font-semibold mt-6 mb-2">Caractéristiques des morpions</h3>
+  <p>
+      Chaque morpion possède 4 caractéristiques dont la somme vaut <strong>15</strong> :
+  </p>
+  <ul class="list-disc ml-6 mt-2">
+      <li>Points de vie</li>
+      <li>Points d’attaque</li>
+      <li>Points de mana</li>
+      <li>Points de réussite</li>
+  </ul>
+  <p class="mt-3">
+      Un morpion est mort lorsque ses points de vie atteignent 0.
+  </p>
+
+  <h3 class="text-xl font-semibold mt-6 mb-2">Attaques et sorts</h3>
+  <p>
+      Lorsqu’un morpion tente une action, sa réussite dépend de ses points de réussite : 
+      <strong>probabilité = 10 × points de réussite</strong>.
+      À chaque action réussie, il gagne +0.5 point de réussite.
+  </p>
+
+  <h4 class="text-lg font-semibold mt-4 mb-1">Attaques</h4>
+  <p>
+      Un morpion peut attaquer un adversaire situé sur une case adjacente 
+      (horizontalement ou verticalement). Une attaque réussie inflige des dégâts 
+      égaux aux points d’attaque de l’attaquant.
+  </p>
+
+  <h4 class="text-lg font-semibold mt-4 mb-1">Sorts disponibles</h4>
+  <ul class="list-disc ml-6">
+      <li><strong>Boule de feu</strong> — inflige 3 dégâts (coût : 2 mana)</li>
+      <li><strong>Soin</strong> — rend 2 points de vie (coût : 1 mana)</li>
+      <li><strong>Armageddon</strong> — détruit une case et tue tout morpion dessus (coût : 5 mana)</li>
+  </ul>
+
+  <p class="mt-4">
+      Les morpions sont <strong>loyaux</strong> (ils n’attaquent pas un allié) et 
+      <strong>non kamikazes</strong> (ils ne peuvent pas lancer armageddon sur leur propre case).
+  </p>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% for i in range(SESSION['dimension']**2) %}
+    {% set is_last_col = ((i + 1) % SESSION['dimension']) == 0 %}
+    {% set is_last_row = i >= (SESSION['dimension'] * (SESSION['dimension'] - 1)) %}
+    {% set row = (i // SESSION['dimension']) %}
+    {% set col = i % SESSION['dimension'] %}
+    {% set case = SESSION['game'].grid.playGround[row][col] if SESSION.get('game') is defined else none %}
+    {% set morpion = case.morpionPlayer if case is not none and case.morpionPlayer is not none else none %}
+    <div class="game-cell {% if case.state == False %}bg-black {% elif morpion.player == SESSION['joueur1'] %}bg-{{SESSION['couleurJoueur1']}}-500 {% endif %}
+                        {% if morpion.player == SESSION['joueur2'] %}bg-{{SESSION['couleurJoueur2']}}-500 {% endif %}
+                        {% if is_last_col %}no-right{% endif %} {% if is_last_row %}no-bottom{% endif %}
+                        ">
+        <form method="POST">
+            <input type="hidden" name="grid_morpion_row" value='{{ row }}'>
+            <input type="hidden" name="grid_morpion_col" value='{{ col }}'>
+            <input type="hidden" name="grid_morpion" value='{{ morpion }}'>
+            <button type="submit" {% if case.state == False %}disabled{% endif %}>
+                {% if case.state == False %}
+                    <div style="width: 100%; height: 100%; background-color: black;"></div>
+                {% elif morpion is none %}
+                    <img src="{{ SESSION['DIRECTORY'] }}/static/img/blank.png" alt="" class="cell-img">
+                {% elif morpion is not none %}
+                    <img src="{{ SESSION['DIRECTORY'] }}/{{ morpion.img_path }}" alt="" class="cell-img">
+                    <div class="morpion-stats" aria-hidden="false">
+                        <span class="stat hp" title="HP" aria-label="Points de vie">
+                            <span class="icon" aria-hidden="true">❤️</span>
+                            <span class="stat-val">{{ morpion.hp }}</span>
+                        </span>
+                        <span class="stat att" title="Attaque" aria-label="Attaque">
+                            <span class="icon" aria-hidden="true">⚔️</span>
+                            <span class="stat-val">{{ morpion.att }}</span>
+                        </span>
+                        <span class="stat mana" title="Mana" aria-label="Mana">
+                            <span class="icon" aria-hidden="true">💧</span>
+                            <span class="stat-val">{{ morpion.mana }}</span>
+                        </span>
+                        <span class="stat hit" title="Précision" aria-label="Précision">
+                            <span class="icon" aria-hidden="true">🎯</span>
+                            <span class="stat-val">{{ morpion.hit }}</span>
+                        </span>
+                    </div>
+                    {% endif %}
+            </button>
+        </form>
+    </div>
+{% endfor %}
+
